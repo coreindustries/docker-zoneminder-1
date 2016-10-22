@@ -1,13 +1,13 @@
 #name of container: docker-zoneminder
 #versison of container: 0.5.8
-FROM quantumobject/docker-baseimage:15.10
+FROM ubuntu:16.04
 MAINTAINER Angel Rodriguez  "angel@quantumobject.com"
 
 #add repository and update the container
 #Installation of nesesary package/software for this containers...
-RUN echo "deb http://archive.ubuntu.com/ubuntu `cat /etc/container_environment/DISTRIB_CODENAME`-backports main restricted universe" >> /etc/apt/sources.list  \
-      && echo "deb http://ppa.launchpad.net/iconnor/zoneminder-master/ubuntu `cat /etc/container_environment/DISTRIB_CODENAME` main" >> /etc/apt/sources.list  \
-      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 776FFB04
+# RUN echo "deb http://archive.ubuntu.com/ubuntu `cat /etc/container_environment/DISTRIB_CODENAME`-backports main restricted universe" >> /etc/apt/sources.list  \
+#       && echo "deb http://ppa.launchpad.net/iconnor/zoneminder-master/ubuntu `cat /etc/container_environment/DISTRIB_CODENAME` main" >> /etc/apt/sources.list  \
+#       && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 776FFB04
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q mysql-server  \
                                         libvlc-dev  \
                                         libvlccore-dev\
@@ -16,9 +16,14 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y -q mysql
                                         ntp \
                                         dialog \
                                         ntpdate \
-                    && apt-get clean \
-                    && rm -rf /tmp/* /var/tmp/*  \
-                    && rm -rf /var/lib/apt/lists/*
+                                        software-properties-common 
+                    # && apt-get clean \
+                    # && rm -rf /tmp/* /var/tmp/*  \
+                    # && rm -rf /var/lib/apt/lists/*
+
+RUN add-apt-repository ppa:iconnor/zoneminder && \
+    apt-get update && \
+    apt-get install -y zoneminder
 
 #remove temporal to fix some other problem and check others .. 
 #install ffmpeg
