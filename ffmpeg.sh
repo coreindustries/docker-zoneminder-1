@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "deb http://archive.ubuntu.com/ubuntu `cat /etc/container_environment/DISTRIB_CODENAME` multiverse" >> /etc/apt/sources.list
+echo "deb http://archive.ubuntu.com/ubuntu xenial multiverse" >> /etc/apt/sources.list
 apt-get update
 apt-get install -y -q build-essential  git-core \
                               checkinstall yasm \
@@ -9,8 +9,7 @@ apt-get install -y -q build-essential  git-core \
                               libxfixes-dev zlib1g-dev \
                               pkg-config libx264-dev \
                               libfaac-dev libmp3lame-dev \
-                              netcat \
-                              wget
+                              netcat 
                               
 FFMPEG_VERSION=3.1.5
 
