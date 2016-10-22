@@ -9,9 +9,10 @@ apt-get install -y -q build-essential  git-core \
                               libxfixes-dev zlib1g-dev \
                               pkg-config libx264-dev \
                               libfaac-dev libmp3lame-dev \
-                              netcat 
+                              netcat \
+                              wget
                               
-FFMPEG_VERSION=3.1.3
+FFMPEG_VERSION=3.1.5
 
  cd /usr/local/src
  if [ ! -d "/usr/local/src/ffmpeg-${FFMPEG_VERSION}" ]; then
